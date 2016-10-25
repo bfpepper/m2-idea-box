@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_action :find_idea, only: [:show, :edit, :update, :destroy]
+  before_action :get_ideas, only: [:new, :create, :update]
 
   def index
     @ideas = Idea.all
@@ -10,14 +11,13 @@ class IdeasController < ApplicationController
 
   def new
     @idea = Idea.new
-    @categories = Category.all
   end
 
   def create
-    idea = Idea.new(idea_params)
-    if idea.save
-      flash[:success] = "#{idea.title} has been created!"
-      redirect_to idea_path(idea)
+    @idea = Idea.new(idea_params)
+    if @idea.save
+      flash[:success] = "#{@idea.title} has been created!"
+      redirect_to idea_path(@idea)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update
+    if @idea.update(idea_params)
       flash[:success] = "#{@idea.title} has been updated!"
       redirect_to idea_path(@idea)
     else
@@ -43,12 +43,16 @@ class IdeasController < ApplicationController
 
   private
 
+  def get_ideas
+    @categories = Category.all
+  end
+
   def find_idea
     @idea = Idea.find(params[:id])
   end
 
   def idea_params
-    params.require(:idea).permit(:title, :description, :categoy_id)
+    params.require(:idea).permit(:title, :description, :category_id)
   end
 
 end
