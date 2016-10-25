@@ -1,0 +1,6 @@
+<%= form_for @idea do |f| %>
+<%= f.text_field :title, placeholder: "Idea's name" %>
+<%= f.text_area :description, placeholder: "What is your idea about?" %>
+<%= f.collection_select :category_id, @categories, :id, :title %>
+<%= f.submit %>
+<% end %>
