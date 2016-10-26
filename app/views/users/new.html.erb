@@ -1,0 +1,9 @@
+<h1>Create your new account here!</h1>
+
+<%= form_for @user do |f| %>
+<%= f.text_field :name, placeholder: "Your Name" %>
+<%= f.text_field :username, placeholder: "Choose Your Username" %>
+<%= f.password_field :password, placeholder: "Choose Your Password" %>
+<%= f.password_field :password_confirmation, placeholder: "Re-enter Your Password" %>
+<%= f.submit "Create Your Account" %>
+<% end %>

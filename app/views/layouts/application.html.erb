@@ -23,6 +23,14 @@
           <li class="active">
             <%= link_to "Your ideas", ideas_path %></span></li>
             <li><%= link_to "Create a New Idea", new_idea_path %></li>
+            <li><%= link_to "Create an Account", new_user_path %></li>
+          </div>
+          <div>
+            <% if current_user %>
+              <%= link_to "Logout", logout_path, method: :delete %>
+              <% else %>
+              <%= link_to "Login", login_path %>
+              <% end %>
           </div>
         </div>
       </nav>
