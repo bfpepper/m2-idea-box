@@ -18,7 +18,7 @@ module Admin
       category = Category.find(params[:id])
       flass[:success] = "#{cateogry.title} has been deleted!"
       category.destroy
-      
+
     end
 
     private
